@@ -4,7 +4,7 @@
 #
 Name     : kimageannotator
 Version  : 0.6.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/ksnip/kImageAnnotator/archive/refs/tags/v0.6.0.tar.gz
 Source0  : https://github.com/ksnip/kImageAnnotator/archive/refs/tags/v0.6.0.tar.gz
 Summary  : No detailed summary available
