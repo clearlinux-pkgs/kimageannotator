@@ -4,7 +4,7 @@
 #
 Name     : kimageannotator
 Version  : 0.6.0
-Release  : 2
+Release  : 3
 URL      : https://github.com/ksnip/kImageAnnotator/archive/refs/tags/v0.6.0.tar.gz
 Source0  : https://github.com/ksnip/kImageAnnotator/archive/refs/tags/v0.6.0.tar.gz
 Summary  : No detailed summary available
@@ -20,6 +20,9 @@ BuildRequires : kcolorpicker-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86vm-dev
 BuildRequires : qtbase-dev mesa-dev
 BuildRequires : qttools-dev
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 # kImageAnnotator [![Linux Build Status][github-badge-linux]][github-url-linux] [![Windows Build Status][github-badge-windows]][github-url-windows] [![Translation status][weblate-badge]][weblate-url]
@@ -72,23 +75,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1661784921
+export SOURCE_DATE_EPOCH=1676845482
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1661784921
+export SOURCE_DATE_EPOCH=1676845482
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kimageannotator
 cp %{_builddir}/kImageAnnotator-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/kimageannotator/a8a12e6867d7ee39c21d9b11a984066099b6fb6b || :
